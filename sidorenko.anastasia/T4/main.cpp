@@ -76,4 +76,3 @@ int main()
     printInfo(shapes);
     return 0;
 }
-
