@@ -9,8 +9,6 @@
 #include "circle.h"
 #include "rightTrapezoid.h"
 #include "compositeShape.h"
-
-
 void printInfo(const std::vector<std::unique_ptr<Shape>>& shapes)
 {
     std::cout << std::fixed << std::setprecision(2);
@@ -47,8 +45,6 @@ void printInfo(const std::vector<std::unique_ptr<Shape>>& shapes)
         }
     }
 }
-
-
 int main()
 {
     std::vector<std::unique_ptr<Shape>> shapes;
@@ -60,7 +56,6 @@ int main()
     composite->addShape(std::make_unique<Rectangle>(Point(3, -2), Point(7, 0)));
     composite->addShape(std::make_unique<Circle>(Point(-1, 1), 1));
     composite->addShape(std::make_unique<RightTrapezoid>(Point(9, 3), 2, 1, 3));
-
     shapes.push_back(std::move(composite));
     printInfo(shapes);
     for (size_t i = 0; i < shapes.size(); ++i)
