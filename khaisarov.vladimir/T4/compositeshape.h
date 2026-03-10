@@ -2,6 +2,7 @@
 #define COMPOSITESHAPE_H
 #include "shape.h"
 #include <vector>
+#include <memory>
 
 class CompositeShape : public Shape
 {
