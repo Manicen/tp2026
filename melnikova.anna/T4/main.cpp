@@ -48,7 +48,6 @@ int main()
     Circle circ1({ 2.0, 2.0 }, 3.0);
     IsoscelesTrapezoid trap1({ 0.0, 0.0 }, 8.0, 4.0, 3.0);
 
-    std::cout << "========== before scaling ==========" << std::endl;
     printShape(rect1);
     printShape(rect2);
     printShape(circ1);
@@ -56,15 +55,16 @@ int main()
     printComposite(*composite);
 
     double coeff;
-    std::cin >> coeff;
-
+    if (!(std::cin >> coeff)) {
+        std::cerr << "error" << std::endl;
+        return 1;
+    }
     rect1.scale(coeff);
     rect2.scale(coeff);
     circ1.scale(coeff);
     trap1.scale(coeff);
     composite->scale(coeff);
 
-    std::cout << "\n========== after scaling ==========" << std::endl;
     printShape(rect1);
     printShape(rect2);
     printShape(circ1);
