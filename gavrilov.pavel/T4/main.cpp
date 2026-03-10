@@ -16,17 +16,16 @@ void printShapeInfo(const Shape& shape) {
 }
 
 int main() {
+    std::cerr << "Shapes description without scaling\n";
+
     std::cout << std::fixed << std::setprecision(2);
     std::cout << "=== GEOMETRIC SHAPES ===\n\n";
 
     std::vector<std::unique_ptr<Shape>> shapes;
 
     shapes.push_back(std::make_unique<Rectangle>(Point(0, 0), Point(4, 3)));
-
     shapes.push_back(std::make_unique<Ring>(Point(5, 5), 5.0, 2.0));
-
     shapes.push_back(std::make_unique<Square>(Point(2, 2), 3.0));
-
     shapes.push_back(std::make_unique<Rectangle>(Point(-2, -1), Point(1, 2)));
 
     auto composite = std::make_unique<CompositeShape>();
@@ -43,8 +42,7 @@ int main() {
             if (comp) {
                 comp->printInfo();
             }
-        }
-        else {
+        } else {
             printShapeInfo(*shape);
         }
     }
@@ -62,11 +60,10 @@ int main() {
             if (comp) {
                 comp->printInfo();
             }
-        }
-        else {
+        } else {
             printShapeInfo(*shape);
         }
     }
 
-    return 0;
+    return 1;
 }
