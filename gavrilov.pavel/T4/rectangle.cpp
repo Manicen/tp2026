@@ -1,8 +1,12 @@
 #include "rectangle.h"
+#include <stdexcept>
 #include <cmath>
 
 Rectangle::Rectangle(const Point& bottomLeft, const Point& topRight)
     : bottomLeft(bottomLeft), topRight(topRight) {
+    if (bottomLeft.x >= topRight.x || bottomLeft.y >= topRight.y) {
+        throw std::invalid_argument("Invalid rectangle coordinates: bottomLeft must be < topRight");
+    }
 }
 
 double Rectangle::getArea() const {
@@ -27,7 +31,6 @@ void Rectangle::move(double dx, double dy) {
 
 void Rectangle::scale(double factor) {
     Point center = getCenter();
-
     bottomLeft.x = center.x + (bottomLeft.x - center.x) * factor;
     bottomLeft.y = center.y + (bottomLeft.y - center.y) * factor;
     topRight.x = center.x + (topRight.x - center.x) * factor;
