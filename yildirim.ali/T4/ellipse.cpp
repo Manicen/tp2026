@@ -1,11 +1,13 @@
 #include "ellipse.h"
 #include <cmath>
+#include <iostream>
 
-#ifndef M_PI
-#define M_PI 3.14159265358979323846
-#endif
-
-Ellipse::Ellipse(const Point& c, double r_x, double r_y) : center(c), rx(r_x), ry(r_y) {}
+Ellipse::Ellipse(const Point& c, double r_x, double r_y) : center(c), rx(r_x), ry(r_y) {
+    if (r_x <= 0 || r_y <= 0) {
+        std::cerr << "Error: radii must be positive" << std::endl;
+        exit(1);
+    }
+}
 double Ellipse::getArea() const {
     return M_PI * rx * ry;
 }
@@ -17,6 +19,10 @@ void Ellipse::move(double dx, double dy) {
     center.y += dy;
 }
 void Ellipse::scale(double factor) {
+    if (factor <= 0) {
+        std::cerr << "Error: scale factor must be positive" << std::endl;
+        exit(1);
+    }
     rx *= factor;
     ry *= factor;
 }

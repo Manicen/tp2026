@@ -1,6 +1,7 @@
 #include "composite_shape.h"
 #include <algorithm>
 #include <limits>
+#include <iostream>
 
 void CompositeShape::addShape(std::unique_ptr<Shape> shape) {
     shapes.push_back(std::move(shape));
@@ -9,7 +10,7 @@ void CompositeShape::getBoundingBox(Point& min, Point& max) const {
     if (shapes.empty()) {
         min = Point(0, 0);
         max = Point(0, 0);
-    return;
+        return;
     }
     double minX = std::numeric_limits<double>::max();
     double minY = std::numeric_limits<double>::max();
@@ -37,13 +38,9 @@ Point CompositeShape::getCenter() const {
     if (shapes.empty()) {
         return Point(0, 0);
     }
-    double sumX = 0.0, sumY = 0.0;
-    for (const auto& shape : shapes) {
-        Point center = shape->getCenter();
-        sumX += center.x;
-        sumY += center.y;
-    }
-    return Point(sumX / shapes.size(), sumY / shapes.size());
+    Point min, max;
+    getBoundingBox(min, max);
+    return Point((min.x + max.x) / 2.0, (min.y + max.y) / 2.0);
 }
 void CompositeShape::move(double dx, double dy) {
     for (auto& shape : shapes) {
@@ -51,9 +48,13 @@ void CompositeShape::move(double dx, double dy) {
     }
 }
 void CompositeShape::scale(double factor) {
+    if (factor <= 0) {
+        std::cerr << "Error: scale factor must be positive" << std::endl;
+        exit(1);
+    }
     if (shapes.empty()) return;
 
-Point compositeCenter = getCenter();
+    Point compositeCenter = getCenter();
     for (auto& shape : shapes) {
         Point shapeCenter = shape->getCenter();
 

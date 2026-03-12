@@ -1,6 +1,12 @@
 #include "square.h"
+#include <iostream>
 
-Square::Square(const Point& bl, double side) : bottomLeft(bl), sideLength(side) {}
+Square::Square(const Point& bl, double side) : bottomLeft(bl), sideLength(side) {
+    if (side <= 0) {
+        std::cerr << "Error: side length must be positive" << std::endl;
+        exit(1);
+    }
+}
 double Square::getArea() const {
     return sideLength * sideLength;
 }
@@ -14,6 +20,10 @@ void Square::move(double dx, double dy) {
     bottomLeft.y += dy;
 }
 void Square::scale(double factor) {
+    if (factor <= 0) {
+        std::cerr << "Error: scale factor must be positive" << std::endl;
+        exit(1);
+    }
     Point center = getCenter();
     bottomLeft.x = center.x + (bottomLeft.x - center.x) * factor;
     bottomLeft.y = center.y + (bottomLeft.y - center.y) * factor;
@@ -24,7 +34,7 @@ std::string Square::getName() const {
 }
 bool Square::containsPoint(const Point& p) const {
     return (p.x >= bottomLeft.x && p.x <= bottomLeft.x + sideLength &&
-    p.y >= bottomLeft.y && p.y <= bottomLeft.y + sideLength);
+            p.y >= bottomLeft.y && p.y <= bottomLeft.y + sideLength);
 }
 double Square::getPerimeter() const {
     return 4 * sideLength;

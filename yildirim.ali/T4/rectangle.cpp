@@ -2,7 +2,12 @@
 #include <iostream>
 #include <algorithm>
 
-Rectangle::Rectangle(const Point& bl, const Point& tr) : bottomLeft(bl), topRight(tr) {}
+Rectangle::Rectangle(const Point& bl, const Point& tr) : bottomLeft(bl), topRight(tr) {
+    if (bl.x >= tr.x || bl.y >= tr.y) {
+        std::cerr << "Error: invalid rectangle coordinates" << std::endl;
+        exit(1);
+    }
+}
 double Rectangle::getArea() const {
     double width = topRight.x - bottomLeft.x;
     double height = topRight.y - bottomLeft.y;
@@ -20,6 +25,10 @@ void Rectangle::move(double dx, double dy) {
     topRight.y += dy;
 }
 void Rectangle::scale(double factor) {
+    if (factor <= 0) {
+        std::cerr << "Error: scale factor must be positive" << std::endl;
+        exit(1);
+    }   
     Point center = getCenter();
     bottomLeft.x = center.x + (bottomLeft.x - center.x) * factor;
     bottomLeft.y = center.y + (bottomLeft.y - center.y) * factor;
@@ -35,6 +44,7 @@ double Rectangle::getPerimeter() const {
     return 2 * (width + height);
 }
 bool Rectangle::containsPoint(const Point& p) const {
-    return (p.x >= bottomLeft.x && p.x <= topRight.x && p.y >= bottomLeft.y && p.y <= topRight.y);
+    return (p.x >= bottomLeft.x && p.x <= topRight.x && 
+            p.y >= bottomLeft.y && p.y <= topRight.y);
 }
 //
