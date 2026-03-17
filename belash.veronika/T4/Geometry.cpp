@@ -33,12 +33,7 @@ void printInfo(const std::vector<std::unique_ptr<Shape>>& shapes) {
     }
 }
 
-int main(int argc, char* /* argv */[]) {
-    if (argc == 1) {
-        std::cerr << "Error: No input provided" << std::endl;
-        return 1;
-    }
-
+int main(int /* argc */, char* /* argv */[]) {
     std::vector<std::unique_ptr<Shape>> shapes;
 
     shapes.push_back(std::make_unique<Rectangle>(Point{ 0, 0 }, Point{ 2, 3 }));
