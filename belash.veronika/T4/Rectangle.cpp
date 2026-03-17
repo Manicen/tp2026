@@ -3,7 +3,7 @@
 
 Rectangle::Rectangle(const Point& bl, const Point& tr)
     : bottomLeft_(bl), topRight_(tr) {
-    if (tr.x - bl.x < 0 || tr.y - bl.y < 0) {
+    if (tr.x - bl.x <= 0 || tr.y - bl.y <= 0) {
         throw std::invalid_argument("Rectangle dimensions cannot be negative");
     }
 }
@@ -12,6 +12,10 @@ double Rectangle::getArea() const {
     double width = topRight_.x - bottomLeft_.x;
     double height = topRight_.y - bottomLeft_.y;
     return width * height;
+}
+
+Shape::BoundingBox Rectangle::getBoundingBox() const {
+    return { bottomLeft_, topRight_ };
 }
 
 Point Rectangle::getCenter() const {

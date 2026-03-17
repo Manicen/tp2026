@@ -13,25 +13,30 @@ double CompositeShape::getArea() const {
     return total;
 }
 
-Point CompositeShape::getCenter() const {
+
+Shape::BoundingBox CompositeShape::getBoundingBox() const {
     if (shapes_.empty()) {
-        return Point(0, 0);
+        return { Point(0, 0), Point(0, 0) };
     }
 
-    double minX = shapes_[0]->getCenter().x;
-    double maxX = shapes_[0]->getCenter().x;
-    double minY = shapes_[0]->getCenter().y;
-    double maxY = shapes_[0]->getCenter().y;
+    auto bb = shapes_[0]->getBoundingBox();
+    double minX = bb.min.x, maxX = bb.max.x;
+    double minY = bb.min.y, maxY = bb.max.y;
 
-    for (const auto& shape : shapes_) {
-        Point center = shape->getCenter();
-        minX = std::min(minX, center.x);
-        maxX = std::max(maxX, center.x);
-        minY = std::min(minY, center.y);
-        maxY = std::max(maxY, center.y);
+    for (size_t i = 1; i < shapes_.size(); ++i) {
+        auto current = shapes_[i]->getBoundingBox();
+        minX = std::min(minX, current.min.x);
+        maxX = std::max(maxX, current.max.x);
+        minY = std::min(minY, current.min.y);
+        maxY = std::max(maxY, current.max.y);
     }
 
-    return Point((minX + maxX) / 2.0, (minY + maxY) / 2.0);
+    return { Point(minX, minY), Point(maxX, maxY) };
+}
+
+Point CompositeShape::getCenter() const {
+    auto bb = getBoundingBox();
+    return Point((bb.min.x + bb.max.x) / 2.0, (bb.min.y + bb.max.y) / 2.0);
 }
 
 void CompositeShape::move(double dx, double dy) {

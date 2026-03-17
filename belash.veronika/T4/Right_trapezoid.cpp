@@ -3,13 +3,21 @@
 
 RightTrapezoid::RightTrapezoid(const Point& bl, double bBase, double tBase, double h)
     : bottomLeft_(bl), bottomBase_(bBase), topBase_(tBase), height_(h) {
-    if (bBase < 0 || tBase < 0 || h < 0) {
+    if (bBase <= 0 || tBase <= 0 || h <= 0) {
         throw std::invalid_argument("Trapezoid dimensions cannot be negative");
     }
 }
 
 double RightTrapezoid::getArea() const {
     return (bottomBase_ + topBase_) / 2.0 * height_;
+}
+
+Shape::BoundingBox RightTrapezoid::getBoundingBox() const {
+    double maxBase = std::max(bottomBase_, topBase_);
+    return {
+        bottomLeft_,                                         
+        Point(bottomLeft_.x + maxBase, bottomLeft_.y + height_) 
+    };
 }
 
 Point RightTrapezoid::getCenter() const {

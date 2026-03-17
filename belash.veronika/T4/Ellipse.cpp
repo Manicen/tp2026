@@ -4,9 +4,16 @@
 
 Ellipse::Ellipse(const Point& c, double rx, double ry)
     : center_(c), radiusX_(rx), radiusY_(ry) {
-    if (rx < 0 || ry < 0) {
+    if (rx <= 0 || ry <= 0) {
         throw std::invalid_argument("Ellipse radii cannot be negative");
     }
+}
+
+Shape::BoundingBox Ellipse::getBoundingBox() const {
+    return {
+        Point(center_.x - radiusX_, center_.y - radiusY_),
+        Point(center_.x + radiusX_, center_.y + radiusY_)
+    };
 }
 
 double Ellipse::getArea() const {

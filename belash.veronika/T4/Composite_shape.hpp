@@ -19,6 +19,7 @@ public:
     void move(double dx, double dy) override;
     void scale(double factor) override;
     std::string getName() const override;
+    Shape::BoundingBox getBoundingBox() const override;
 
     const std::vector<std::unique_ptr<Shape>>& getShapes() const;
 };

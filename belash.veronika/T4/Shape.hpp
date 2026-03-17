@@ -6,6 +6,11 @@
 
 class Shape {
 public:
+    struct BoundingBox {
+        Point min;
+        Point max;
+    };
+    virtual BoundingBox getBoundingBox() const = 0;
     virtual ~Shape() {}
 
     virtual double getArea() const = 0;
