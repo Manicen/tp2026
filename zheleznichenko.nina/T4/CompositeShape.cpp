@@ -1,68 +1,68 @@
 #include "CompositeShape.h"
 
-void CompositeShape::addShape(std::unique_ptr<Shape> shape)
+void CompositeShape::addShape(std::unique_ptr< Shape > shape)
 {
-    shapes.push_back(std::move(shape));
+  shapes.push_back(std::move(shape));
 }
 
 double CompositeShape::getArea() const
 {
-    double sum = 0;
+  double sum = 0;
 
-    for (const auto& s : shapes)
-        sum += s->getArea();
+  for (const auto& s : shapes)
+    sum += s->getArea();
 
-    return sum;
+  return sum;
 }
 
 Point CompositeShape::getCenter() const
 {
-    double x = 0;
-    double y = 0;
+  double x = 0;
+  double y = 0;
 
-    for (const auto& s : shapes)
-    {
-        Point c = s->getCenter();
-        x += c.x;
-        y += c.y;
-    }
+  for (const auto& s : shapes)
+  {
+    Point c = s->getCenter();
+    x += c.x;
+    y += c.y;
+  }
 
-    x /= shapes.size();
-    y /= shapes.size();
+  x /= shapes.size();
+  y /= shapes.size();
 
-    return Point(x, y);
+  return Point(x, y);
 }
 
 std::string CompositeShape::getName() const
 {
-    return "CompositeShape";
+  return "CompositeShape";
 }
 
 void CompositeShape::move(double dx, double dy)
 {
-    for (auto& s : shapes)
-        s->move(dx, dy);
+  for (auto& s : shapes)
+    s->move(dx, dy);
 }
 
 void CompositeShape::scale(double factor)
 {
-    Point center = getCenter();
+  Point center = getCenter();
 
-    for (auto& s : shapes)
-    {
-        Point sc = s->getCenter();
+  for (auto& s : shapes)
+  {
+    Point sc = s->getCenter();
 
-        double dx = sc.x - center.x;
-        double dy = sc.y - center.y;
+    double dx = sc.x - center.x;
+    double dy = sc.y - center.y;
 
-        double newDx = dx * factor;
-        double newDy = dy * factor;
+    double newDx = dx * factor;
+    double newDy = dy * factor;
 
-        double newX = center.x + newDx;
-        double newY = center.y + newDy;
+    double newX = center.x + newDx;
+    double newY = center.y + newDy;
 
-        s->move(newX - sc.x, newY - sc.y);
+    s->move(newX - sc.x, newY - sc.y);
 
-        s->scale(factor);
-    }
+    s->scale(factor);
+  }
 }

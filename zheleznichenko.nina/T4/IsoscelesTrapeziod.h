@@ -1,24 +1,24 @@
 #ifndef ISOSCELESTRAPEZIOD
 #define ISOSCELESTRAPEZIOD
-#include "shape.h"
+#include "Shape.h"
 
-class IsoscelesTrapeziod : public Shape
+class IsoscelesTrapeziod: public Shape
 {
 private:
-    Point bottomLeft;
-    double bottomBase;
-    double topBase;
-    double height;
+  Point bottomLeft;
+  double bottomBase;
+  double topBase;
+  double height;
 
 public:
-    IsoscelesTrapeziod(Point bl, double bBase, double tBase, double h);
+  IsoscelesTrapeziod(Point bl, double bBase, double tBase, double h);
 
-    double getArea() const override;
-    Point getCenter() const override;
+  double getArea() const override;
+  Point getCenter() const override;
 
-    void move(double dx, double dy) override;
-    void scale(double factor) override;
+  void move(double dx, double dy) override;
+  void scale(double factor) override;
 
-    std::string getName() const override;
+  std::string getName() const override;
 };
 #endif

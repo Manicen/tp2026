@@ -1,23 +1,23 @@
-#ifndefCOMPOSITESHAPE
-#defineCOMPOSITESHAPE
-#include"shape.h"
-#include<vector>
-#include<memory>
+#ifndef COMPOSITESHAPE
+#define COMPOSITESHAPE
+#include "Shape.h"
+#include <vector>
+#include <memory>
 
-classCompositeShape:publicShape
+class CompositeShape: public Shape
 {
 private:
-std::vector<std::unique_ptr<Shape>>shapes;
+  std::vector< std::unique_ptr< Shape > > shapes;
 
 public:
-voidaddShape(std::unique_ptr<Shape>shape);
+  void addShape(std::unique_ptr< Shape > shape);
 
-doublegetArea()constoverride;
-PointgetCenter()constoverride;
+  double getArea() const override;
+  Point getCenter() const override;
 
-voidmove(doubledx,doubledy)override;
-voidscale(doublefactor)override;
+  void move(double dx, double dy) override;
+  void scale(double factor) override;
 
-std::stringgetName()constoverride;
+  std::string getName() const override;
 };
 #endif
