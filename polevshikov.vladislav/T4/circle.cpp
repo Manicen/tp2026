@@ -1,7 +1,7 @@
 #include "circle.h"
 #include <cmath>
 
-Circle::Circle(const Point &center, double radius) : 
+Circle::Circle(const Point &center, double radius) :
 center_(center), radius_(radius) {
     if (radius <= 0.0) {
         throw std::invalid_argument("Radius must be positive");

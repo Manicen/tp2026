@@ -1,6 +1,6 @@
 #include "rectangle.h"
 
-Rectangle::Rectangle(const Point &lowerLeft, double width, double height) : 
+Rectangle::Rectangle(const Point &lowerLeft, double width, double height) :
 lowerLeft_(lowerLeft), width_(width), height_(height) {
     if (width <= 0.0 || height <= 0.0) {
         throw std::invalid_argument("Width and height must be positive");
@@ -29,7 +29,7 @@ void Rectangle::move(const Point &newCenter) {
 void Rectangle::scale(double coefficient) {
     if (coefficient <= 0.0) {
     throw std::invalid_argument("Scale coefficient must be positive");
-    } 
+    }
 
     Point center = getCenter();
     width_ *= coefficient;

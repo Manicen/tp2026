@@ -17,7 +17,7 @@ double CompositeShape::getArea() const {
 
 Point CompositeShape::getCenter() const {
     if (shapes_.empty()) {
-        throw std::logic_error("Composite shape is empty"); 
+        throw std::logic_error("Composite shape is empty");
     }
 
     Point firstCenter = shapes_[0]->getCenter();
@@ -76,4 +76,3 @@ void CompositeShape::scale(double coefficient) {
 std::string CompositeShape::getName() const {
     return "COMPOSITE SHAPE";
 }
-    

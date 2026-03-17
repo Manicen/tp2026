@@ -18,4 +18,3 @@ public:
     void scale(double coefficient) override;
     std::string getName() const override;
 };
-
