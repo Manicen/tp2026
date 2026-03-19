@@ -5,9 +5,9 @@
 
 class Ring : public Shape {
 private:
-    Point center;
-    double outerRadius;
-    double innerRadius;
+    Point center_;
+    double outerRadius_;
+    double innerRadius_;
 
 public:
     Ring(const Point& center, double outerRadius, double innerRadius);
