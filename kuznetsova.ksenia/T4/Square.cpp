@@ -6,7 +6,7 @@ Square::Square(const Point& bottomLeft, double sideLength)
 : bottomLeft_(bottomLeft), side_(sideLength) {
 
 if (sideLength <= 0) {
-throw std::invalid_argument("Ошибка: Длина стороны квадрата должна быть положительной.");
+throw std::invalid_argument("Error: The zoom level should be positive..");
 }
 }
 
@@ -26,7 +26,7 @@ bottomLeft_.y += dy;
 
 void Square::scale(double factor) {
 if (factor <= 0) {
-throw std::invalid_argument("Ошибка: Коэффициент масштабирования должен быть положительным.");
+throw std::invalid_argument("Error: The zoom level should be positive..");
 }
 
 Point center = getCenter();
