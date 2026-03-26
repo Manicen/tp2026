@@ -33,6 +33,11 @@ int main()
     if (!(std::cin >> std::ws)) {
         return 0;
     }
+    double coeff;
+    if (!(std::cin >> coeff)) {
+        std::cerr << "error" << std::endl;
+        return 1;
+    }
     std::cout << std::fixed << std::setprecision(2);
     std::vector<std::unique_ptr<Shape>> shapes;
     shapes.push_back(std::make_unique<IsoscelesTrapezoid>(Point{ 0.0, 0.0 }, 6.0, 4.0, 2.0));
@@ -49,11 +54,6 @@ int main()
     printShape(circ1);
     printShape(trap1);
     printComposite(*composite);
-    double coeff;
-    if (!(std::cin >> coeff)) {
-        std::cerr << "error" << std::endl;
-        return 1;
-    }
     rect1.scale(coeff);
     rect2.scale(coeff);
     circ1.scale(coeff);
