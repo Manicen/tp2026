@@ -64,13 +64,11 @@ int main()
     double factor = 0.0;
     if (!(std::cin >> factor))
     {
-        std::cerr << "Error: no scale factor provided\n";
-        return 1;
+        return 0;
     }
     if (factor <= 0.0)
     {
-        std::cerr << "Error: scale factor must be positive\n";
-        return 1;
+        return 0;
     }
     for (size_t i = 0; i < shapes.size(); ++i)
     {
