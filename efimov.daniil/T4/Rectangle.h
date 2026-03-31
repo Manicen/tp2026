@@ -1,7 +1,7 @@
 #ifndef RECTANGLE_H
 #define RECTANGLE_H
 #include "Shape.h"
-#include "point.h"
+#include "Point.h"
 #include <string>
 
 class Rectangle : public Shape

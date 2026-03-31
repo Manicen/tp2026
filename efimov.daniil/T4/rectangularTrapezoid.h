@@ -1,7 +1,7 @@
 #ifndef RECTANGULARTRAPEZOID_H
 #define RECTANGULARTRAPEZOID_H
 #include "Shape.h"
-#include "point.h"
+#include "Point.h"
 #include <string>
 
 class rectangularTrapezoid : public Shape

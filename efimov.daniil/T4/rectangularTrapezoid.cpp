@@ -1,4 +1,4 @@
-#include "rectangularTrapezoid.h"
+#include "RectangularTrapezoid.h"
 #include <stdexcept>
 #include <algorithm>
 

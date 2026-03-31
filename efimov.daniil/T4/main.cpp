@@ -2,9 +2,9 @@
 #include <iomanip>
 #include <memory>
 #include <vector>
-#include "rectangle.h"
+#include "Rectangle.h"
 #include "circle.h"
-#include "rectangulartrapezoid.h"
+#include "RectangularTrapezoid.h"
 #include "compositeShape.h"
 
 void printInfo(const std::vector<std::unique_ptr<Shape>>& shapes)
