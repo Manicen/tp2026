@@ -63,29 +63,8 @@ namespace nspace {
     std::istream& operator>>(std::istream& in, DoubleSciIO&& dest) {
         std::istream::sentry sentry(in);
         if (!sentry) return in;
-        std::string temp;
         in >> std::ws;
-
-        while (in.peek() != ':' && in.peek() != ' ' && in.peek() != ')' && in.peek() != EOF) {
-            temp += static_cast<char>( in.get());
-        }
-
-        bool hasE = (temp.find('e') != std::string::npos || temp.find('E') != std::string::npos);
-        auto it = std::find_if(temp.begin(), temp.end(), [](char ch) {
-            ch = std::tolower(ch);
-            return !std::isdigit(ch) && ch != '.' && ch != 'e' && ch != '-' && ch != '+';
-        });
-
-        if (!hasE || it != temp.end() || temp.empty()) {
-            in.setstate(std::ios::failbit);
-            return in;
-        }
-
-        try {
-            dest.ref = std::stod(temp);
-        } catch (...) {
-            in.setstate(std::ios::failbit);
-        }
+        in>>dest.ref;
         return in;
     }
 
@@ -95,10 +74,7 @@ namespace nspace {
         in >> std::ws;
         char c1, c2;
         if (in >> c1 >> c2 && (c1 == '0' && std::tolower(c2) == 'b')) {
-            std::string bits;
-            while (std::isdigit(in.peek())) bits += static_cast<char>(in.get());
-            if (bits.empty()) dest.ref = 0;
-            else dest.ref = std::stoull(bits, nullptr, 2);
+            in >> dest.ref;
         } else in.setstate(std::ios::failbit);
         return in;
     }
@@ -141,8 +117,13 @@ namespace nspace {
         if (e_pos != std::string::npos && res.size() > e_pos + 2) {
             if (res[e_pos + 2] == '0' && std::isdigit(res.back())) res.erase(e_pos + 2, 1);
         }
-        out << "(:key1 " << res << ":key2 ";
-        printBinary(out, src.key2);
+        out << "(:key1 " << res;
+        if(src.key2%10!=0){
+           out << ":key2 0b0"<<src.key2;
+        }
+        else{
+            out << ":key2 0b"<<src.key2;
+        }
         out << ":key3 \"" << src.key3 << "\":)";
         return out;
     }
