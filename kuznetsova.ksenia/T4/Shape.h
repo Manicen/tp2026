@@ -1,11 +1,11 @@
-#ifndefSHAPE_H
-#defineSHAPE_H
+#ifndef SHAPE_H
+#define SHAPE_H
 
 #include<memory>
 #include<string>
 #include"Point.h"
 
-classShape{
+class Shape{
 public:
 virtual~Shape()=default;
 

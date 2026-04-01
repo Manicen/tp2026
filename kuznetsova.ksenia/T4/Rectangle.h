@@ -1,11 +1,11 @@
-#ifndefRECTANGLE_H
-#defineRECTANGLE_H
+#ifndef RECTANGLE_H
+#define RECTANGLE_H
 
-#include"Shape.h"
-#include"Point.h"
-#include<memory>
+#include "Shape.h"
+#include "Point.h"
+#include <memory>
 
-classRectangle:publicShape{
+class Rectangle:public Shape{
 public:
 Rectangle(constPoint&p1,constPoint&p2);
 

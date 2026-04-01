@@ -1,11 +1,11 @@
-#ifndefSQUARE_H
-#defineSQUARE_H
+#ifndef SQUARE_H
+#define SQUARE_H
 
 #include"Shape.h"
 #include"Point.h"
 #include<memory>
 
-classSquare:publicShape{
+class Square: public Shape{
 public:
 Square(constPoint&bottomLeft,doubleside);
 
