@@ -4,7 +4,7 @@
 #include <memory>
 
 Ring::Ring(const Point& center, double outerRadius, double innerRadius)
-    : center_(center), outerRadius_(outerRadius), innerRadius_(innerRadius)
+    : center(center), outerRadius(outerRadius), innerRadius(innerRadius)
 {
     if (outerRadius <= 0 || innerRadius < 0 || innerRadius >= outerRadius) {
         throw std::invalid_argument("Error: Invalid ring radii.");
@@ -13,18 +13,18 @@ Ring::Ring(const Point& center, double outerRadius, double innerRadius)
 
 double Ring::getArea() const
 {
-    return M_PI * (outerRadius_ * outerRadius_ - innerRadius_ * innerRadius_);
+    return M_PI * (outerRadius * outerRadius - innerRadius * innerRadius);
 }
 
 Point Ring::getCenter() const
 {
-    return center_;
+    return center;
 }
 
 void Ring::move(double dx, double dy)
 {
-    center_.x += dx;
-    center_.y += dy;
+    center.x += dx;
+    center.y += dy;
 }
 
 void Ring::scale(double factor)
@@ -33,8 +33,8 @@ void Ring::scale(double factor)
         throw std::invalid_argument("Error: Scale factor must be positive.");
     }
 
-    outerRadius_ *= factor;
-    innerRadius_ *= factor;
+    outerRadius *= factor;
+    innerRadius *= factor;
 }
 
 std::string Ring::getName() const
