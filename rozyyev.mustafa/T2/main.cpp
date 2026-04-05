@@ -148,7 +148,7 @@ std::istream& operator>>(std::istream& in, DataStruct& dest) {
 
     for (int i = 0; i < 3; ++i) {
         in >> DelimiterIO{ ':' };
-        
+
         char k = '0', e = '0', y = '0', num = '0';
         in >> k >> e >> y >> num;
 
