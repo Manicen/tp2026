@@ -48,10 +48,14 @@ private:
 std::istream& operator>>(std::istream& in, DelimiterIO&& dest);
 std::istream& operator>>(std::istream& in, LabelIO&& dest);
 std::istream& operator>>(std::istream& in, ULLBinIO&& dest);
-std::istream& operator>>(std::istream& in, ComplexIO&& dest);
-std::istream& operator>>(std::istream& in, StringIO&& dest);
-std::istream& operator>>(std::istream& in, DataStruct& dest);
-std::ostream& operator<<(std::ostream& out, const DataStruct& dest);
+std::istream& operator>>(std::istream& in,
+    ComplexIO&& dest);
+std::istream& operator>>(std::istream& in, 
+    StringIO&& dest);
+std::istream& operator>>(std::istream& in, 
+    DataStruct& dest);
+std::ostream& operator<<(std::ostream& out, 
+    const DataStruct& dest);
 
 iofmtguard::iofmtguard(std::basic_ios<char>& s) :
     s_(s),
@@ -213,12 +217,15 @@ std::ostream& operator<<(std::ostream& out, const DataStruct& src) {
     if (src.key1 == 0) {
         out << "0";
     }
+    else if (src.key1 == 1) {
+        out << "01";
+    }
     else {
         unsigned long long temp = src.key1;
         std::string binary;
         while (temp > 0) {
-            binary = char('0' + (temp & 1)) + binary;
-            temp >>= 1;
+            binary = std::to_string(temp % 2) + binary;
+            temp = temp / 2;
         }
         out << binary;
     }
@@ -268,4 +275,3 @@ int main(){
 
     return 0;
 }
-
