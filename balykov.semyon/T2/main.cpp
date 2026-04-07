@@ -50,11 +50,11 @@ std::istream& operator>>(std::istream& in, LabelIO&& dest);
 std::istream& operator>>(std::istream& in, ULLBinIO&& dest);
 std::istream& operator>>(std::istream& in,
     ComplexIO&& dest);
-std::istream& operator>>(std::istream& in, 
+std::istream& operator>>(std::istream& in,
     StringIO&& dest);
-std::istream& operator>>(std::istream& in, 
+std::istream& operator>>(std::istream& in,
     DataStruct& dest);
-std::ostream& operator<<(std::ostream& out, 
+std::ostream& operator<<(std::ostream& out,
     const DataStruct& dest);
 
 iofmtguard::iofmtguard(std::basic_ios<char>& s) :
@@ -130,12 +130,7 @@ std::istream& operator>>(std::istream& in, ULLBinIO&& dest) {
     return in;
 }
 std::istream& operator>>(std::istream& in, ComplexIO&& dest){
-    std::istream::sentry sentry(in);
-    if (!sentry) {
         return in;
-    }
-    double real = 0.0;
-    double image = 0.0;
     in >> DelimiterIO{ '#' };
     in >> DelimiterIO{ 'c' };
     in >> DelimiterIO{ '(' };
@@ -150,6 +145,9 @@ std::istream& operator>>(std::istream& in, ComplexIO&& dest){
 
 std::istream& operator>>(std::istream& in, LabelIO&& dest){
     std::istream::sentry sentry(in);
+    }
+    double real = 0.0;
+    double image = 0.0;
     if (!sentry)
     {
         return in;
