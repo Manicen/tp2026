@@ -13,7 +13,7 @@ public:
     double getArea() const override;
     Point getCenter() const override;
     void move(const Point& delta) override;
-    void scale(double factor);
+    void scale(double factor) override;
     std::string getName() const override;
 };
 

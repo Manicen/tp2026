@@ -1,7 +1,14 @@
 #include "rectangle.h"
 
-Rectangle::Rectangle(const Point& leftP, const Point& rightP)
-: bottomLeft(leftP), topRight(rightP){};
+Rectangle::Rectangle(const Point& leftP, const Point& rightP){
+    if(rightP.x < leftP.x || rightP.y < leftP.y){
+        throw std::invalid_argument("Right point smaller then left");
+    }
+    else{
+        bottomLeft = leftP;
+        topRight = rightP;
+    }
+};
 
 double Rectangle::getArea()const{
     double width = topRight.x - bottomLeft.x;

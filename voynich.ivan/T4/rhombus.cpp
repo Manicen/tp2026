@@ -1,7 +1,14 @@
 #include "rhombus.h"
 
-Rhombus::Rhombus(const Point& center, double vD, double hD)
-: centerP(center), vDiag(vD), hDiag(hD){};
+Rhombus::Rhombus(const Point& center, double vD, double hD){
+    if(vD <= 0 || hD <= 0){
+        throw std::invalid_argument("Diagonals must be possitive");
+    }
+    else{
+        vDiag = vD;
+        hDiag = hD;
+    }
+};
 
 
 double Rhombus::getArea()const{
