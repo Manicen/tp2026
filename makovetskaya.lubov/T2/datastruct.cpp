@@ -98,27 +98,13 @@ std::istream& operator>>(std::istream& in, ULongLongIO&& key) {
 
 std::istream& operator>>(std::istream& in, StringIO&& dest) {
     std::istream::sentry sentry(in);
-    if (!sentry) {
+    if (!sentry)
+    {
         return in;
     }
-
-    in >> DelimiterIO{ '"' };
-    if (!in) {
-        return in;
-    }
-
-    std::getline(in, dest.ref, '"');
-    if (!in) {
-        return in;
-    }
-
-    char next = in.peek();
-    if (next != ':' && next != ' ' && next != '\n' && next != EOF) {
-        in.setstate(std::ios::failbit);
-    }
-
-    return in;
+    return std::getline(in >> DelimiterIO{ '"' }, dest.ref, '"');
 }
+
 
 std::istream& operator>>(std::istream& in, DataStruct& data) {
     std::istream::sentry sentry(in);
@@ -131,21 +117,26 @@ std::istream& operator>>(std::istream& in, DataStruct& data) {
 
     in >> DelimiterIO{ '(' };
 
-    for (int i = 0; i < 3 && in; ++i) {
-        in >> DelimiterIO{ ':' } >> DelimiterIO{ 'k' } >> DelimiterIO{ 'e' } >> DelimiterIO{ 'y' };
+    while (in && (!hasKey1 || !hasKey2 || !hasKey3)) {
+        in >> DelimiterIO{ ':' };
 
-        int keyNum;
-        in >> keyNum;
+        std::string label;
+        in >> label;
 
-        if (keyNum == 1 && !hasKey1) {
+        if (!in) {
+            in.setstate(std::ios::failbit);
+            return in;
+        }
+
+        if (label == "key1" && !hasKey1) {
             in >> DoubleIO{ tmp.key1 };
             hasKey1 = true;
         }
-        else if (keyNum == 2 && !hasKey2) {
+        else if (label == "key2" && !hasKey2) {
             in >> ULongLongIO{ tmp.key2 };
             hasKey2 = true;
         }
-        else if (keyNum == 3 && !hasKey3) {
+        else if (label == "key3" && !hasKey3) {
             in >> StringIO{ tmp.key3 };
             hasKey3 = true;
         }
