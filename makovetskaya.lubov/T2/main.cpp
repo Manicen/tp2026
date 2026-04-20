@@ -44,7 +44,7 @@ int main()
     if (data.empty())
     {
         std::cerr << "No valid data read!" << std::endl;
-        return 1;
+        return 0;
     }
 
     std::sort(data.begin(), data.end(), cmp);
